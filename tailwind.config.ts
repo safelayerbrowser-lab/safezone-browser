@@ -48,14 +48,19 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         coral: {
-          DEFAULT: "hsl(10 80% 65%)",
-          light: "hsl(10 80% 85%)",
-          dark: "hsl(10 80% 45%)",
+          DEFAULT: "hsl(15 75% 70%)",
+          light: "hsl(15 75% 85%)",
+          dark: "hsl(15 75% 55%)",
         },
         teal: {
-          DEFAULT: "hsl(186 85% 45%)",
-          light: "hsl(186 85% 65%)",
-          dark: "hsl(186 85% 25%)",
+          DEFAULT: "hsl(180 45% 55%)",
+          light: "hsl(180 45% 75%)",
+          dark: "hsl(180 55% 40%)",
+        },
+        lavender: {
+          DEFAULT: "hsl(265 50% 70%)",
+          light: "hsl(265 50% 90%)",
+          dark: "hsl(265 60% 45%)",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -126,13 +131,18 @@ export default {
         "slide-up": "slide-up 0.6s ease-out",
         "scale-in": "scale-in 0.4s ease-out",
       },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
       backgroundImage: {
         'gradient-hero': 'var(--gradient-hero)',
         'gradient-feature': 'var(--gradient-feature)',
+        'gradient-warm': 'var(--gradient-warm)',
       },
       boxShadow: {
         'soft': 'var(--shadow-soft)',
         'elevated': 'var(--shadow-elevated)',
+        'subtle': 'var(--shadow-subtle)',
       },
     },
   },

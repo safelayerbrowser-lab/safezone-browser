@@ -1,33 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
+Trauma-informed design with calming colors and generous whitespace
 */
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 215 25% 15%;
+    /* Calming palette for trauma-informed UX */
+    --background: 180 30% 98%;
+    --foreground: 210 20% 25%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 210 20% 25%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 210 20% 25%;
 
-    --primary: 186 85% 45%;
+    /* Soft teal for trust and safety */
+    --primary: 180 45% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 10 80% 65%;
+    /* Warm coral for support and empowerment */
+    --secondary: 15 75% 70%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 30% 94%;
-    --muted-foreground: 215 15% 50%;
+    --muted: 180 25% 95%;
+    --muted-foreground: 210 15% 50%;
 
-    --accent: 186 85% 92%;
-    --accent-foreground: 186 85% 25%;
+    /* Gentle lavender for calm empowerment */
+    --accent: 265 50% 92%;
+    --accent-foreground: 265 60% 35%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
@@ -36,12 +43,21 @@ All colors MUST be HSL.
     --input: 210 25% 88%;
     --ring: 186 85% 45%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
     
-    --gradient-hero: linear-gradient(135deg, hsl(186 85% 45%) 0%, hsl(186 85% 35%) 100%);
-    --gradient-feature: linear-gradient(120deg, hsl(186 85% 96%) 0%, hsl(10 80% 96%) 100%);
-    --shadow-soft: 0 4px 24px -4px hsl(186 85% 45% / 0.15);
-    --shadow-elevated: 0 12px 40px -8px hsl(186 85% 45% / 0.25);
+    /* Calming gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(180 45% 55%) 0%, hsl(180 55% 45%) 100%);
+    --gradient-feature: linear-gradient(120deg, hsl(180 35% 97%) 0%, hsl(265 50% 97%) 100%);
+    --gradient-warm: linear-gradient(120deg, hsl(15 75% 92%) 0%, hsl(265 50% 92%) 100%);
+    
+    /* Soft, trauma-informed shadows */
+    --shadow-soft: 0 2px 16px -2px hsl(180 45% 55% / 0.08);
+    --shadow-elevated: 0 8px 32px -4px hsl(180 45% 55% / 0.12);
+    --shadow-subtle: 0 1px 3px hsl(180 30% 30% / 0.05);
+    
+    /* Animation timings - slower for trauma-informed UX */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -61,26 +77,26 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 215 30% 8%;
-    --foreground: 210 30% 96%;
+    --background: 210 25% 10%;
+    --foreground: 180 25% 95%;
 
-    --card: 215 28% 12%;
-    --card-foreground: 210 30% 96%;
+    --card: 210 25% 14%;
+    --card-foreground: 180 25% 95%;
 
-    --popover: 215 28% 12%;
-    --popover-foreground: 210 30% 96%;
+    --popover: 210 25% 14%;
+    --popover-foreground: 180 25% 95%;
 
-    --primary: 186 85% 50%;
+    --primary: 180 45% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 10 80% 60%;
+    --secondary: 15 75% 65%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 215 25% 18%;
-    --muted-foreground: 215 15% 65%;
+    --muted: 210 20% 20%;
+    --muted-foreground: 180 15% 65%;
 
-    --accent: 186 85% 20%;
-    --accent-foreground: 186 85% 90%;
+    --accent: 265 45% 25%;
+    --accent-foreground: 265 50% 90%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
@@ -89,10 +105,12 @@ All colors MUST be HSL.
     --input: 215 25% 20%;
     --ring: 186 85% 50%;
     
-    --gradient-hero: linear-gradient(135deg, hsl(186 85% 50%) 0%, hsl(186 85% 35%) 100%);
-    --gradient-feature: linear-gradient(120deg, hsl(186 85% 15%) 0%, hsl(10 80% 15%) 100%);
-    --shadow-soft: 0 4px 24px -4px hsl(186 85% 50% / 0.2);
-    --shadow-elevated: 0 12px 40px -8px hsl(186 85% 50% / 0.3);
+    --gradient-hero: linear-gradient(135deg, hsl(180 45% 50%) 0%, hsl(180 55% 35%) 100%);
+    --gradient-feature: linear-gradient(120deg, hsl(210 25% 16%) 0%, hsl(265 45% 20%) 100%);
+    --gradient-warm: linear-gradient(120deg, hsl(15 60% 20%) 0%, hsl(265 45% 22%) 100%);
+    --shadow-soft: 0 2px 16px -2px hsl(180 45% 50% / 0.15);
+    --shadow-elevated: 0 8px 32px -4px hsl(180 45% 50% / 0.2);
+    --shadow-subtle: 0 1px 3px hsl(180 30% 10% / 0.1);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -110,6 +128,12 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-['Inter',sans-serif];
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-['Inter',sans-serif];
+    font-weight: 600;
   }
 }

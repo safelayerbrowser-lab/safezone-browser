@@ -7,18 +7,31 @@ import DashboardOverview from "@/components/dashboard/DashboardOverview";
 import ThreatHistory from "@/components/dashboard/ThreatHistory";
 import ProtectedAccounts from "@/components/dashboard/ProtectedAccounts";
 import FilterSettings from "@/components/dashboard/FilterSettings";
+import OnboardingFlow from "@/components/dashboard/OnboardingFlow";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const DashboardPage = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       if (session?.user) {
         setUser(session.user);
+        
+        // Check if user needs onboarding
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("onboarding_completed")
+          .eq("id", session.user.id)
+          .single();
+        
+        if (profile && !profile.onboarding_completed) {
+          setShowOnboarding(true);
+        }
       } else {
         navigate("/auth");
       }
@@ -50,7 +63,14 @@ const DashboardPage = () => {
   if (!user) return null;
 
   return (
-    <DashboardLayout user={user}>
+    <>
+      {showOnboarding && (
+        <OnboardingFlow
+          userId={user.id}
+          onComplete={() => setShowOnboarding(false)}
+        />
+      )}
+      <DashboardLayout user={user}>
       <div className="space-y-8">
         <div>
           <h1 className="text-3xl font-bold text-foreground mb-2">Safety Dashboard</h1>
@@ -85,6 +105,7 @@ const DashboardPage = () => {
         </Tabs>
       </div>
     </DashboardLayout>
+    </>
   );
 };
 

@@ -50,6 +50,39 @@ export type Database = {
         }
         Relationships: []
       }
+      notification_settings: {
+        Row: {
+          created_at: string | null
+          email_critical_threats: boolean | null
+          email_daily_summary: boolean | null
+          email_weekly_summary: boolean | null
+          id: string
+          network_activity_alerts: boolean | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          email_critical_threats?: boolean | null
+          email_daily_summary?: boolean | null
+          email_weekly_summary?: boolean | null
+          id?: string
+          network_activity_alerts?: boolean | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          email_critical_threats?: boolean | null
+          email_daily_summary?: boolean | null
+          email_weekly_summary?: boolean | null
+          id?: string
+          network_activity_alerts?: boolean | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -100,6 +133,72 @@ export type Database = {
           id?: string
           is_active?: boolean | null
           platform?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      safety_network: {
+        Row: {
+          can_view_score: boolean | null
+          can_view_threats: boolean | null
+          connected_user_id: string
+          connection_type: string
+          created_at: string | null
+          id: string
+          status: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          can_view_score?: boolean | null
+          can_view_threats?: boolean | null
+          connected_user_id: string
+          connection_type: string
+          created_at?: string | null
+          id?: string
+          status?: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          can_view_score?: boolean | null
+          can_view_threats?: boolean | null
+          connected_user_id?: string
+          connection_type?: string
+          created_at?: string | null
+          id?: string
+          status?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      shared_tips: {
+        Row: {
+          category: string
+          content: string
+          created_at: string | null
+          id: string
+          is_public: boolean | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          content: string
+          created_at?: string | null
+          id?: string
+          is_public?: boolean | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          content?: string
+          created_at?: string | null
+          id?: string
+          is_public?: boolean | null
+          title?: string
           user_id?: string
         }
         Relationships: []

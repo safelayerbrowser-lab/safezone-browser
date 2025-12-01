@@ -7,6 +7,9 @@ import DashboardOverview from "@/components/dashboard/DashboardOverview";
 import ThreatHistory from "@/components/dashboard/ThreatHistory";
 import ProtectedAccounts from "@/components/dashboard/ProtectedAccounts";
 import FilterSettings from "@/components/dashboard/FilterSettings";
+import SafetyNetwork from "@/components/dashboard/SafetyNetwork";
+import SharedTips from "@/components/dashboard/SharedTips";
+import NotificationSettings from "@/components/dashboard/NotificationSettings";
 import OnboardingFlow from "@/components/dashboard/OnboardingFlow";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -80,11 +83,14 @@ const DashboardPage = () => {
         </div>
 
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 lg:w-auto">
+          <TabsList className="grid w-full grid-cols-7 lg:w-auto lg:grid-cols-none">
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="threats">Threat History</TabsTrigger>
-            <TabsTrigger value="accounts">Protected Accounts</TabsTrigger>
-            <TabsTrigger value="settings">Filter Settings</TabsTrigger>
+            <TabsTrigger value="threats">Threats</TabsTrigger>
+            <TabsTrigger value="accounts">Accounts</TabsTrigger>
+            <TabsTrigger value="network">Network</TabsTrigger>
+            <TabsTrigger value="tips">Tips</TabsTrigger>
+            <TabsTrigger value="notifications">Alerts</TabsTrigger>
+            <TabsTrigger value="settings">Settings</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
@@ -97,6 +103,18 @@ const DashboardPage = () => {
 
           <TabsContent value="accounts" className="space-y-6">
             <ProtectedAccounts userId={user.id} />
+          </TabsContent>
+
+          <TabsContent value="network" className="space-y-6">
+            <SafetyNetwork userId={user.id} />
+          </TabsContent>
+
+          <TabsContent value="tips" className="space-y-6">
+            <SharedTips userId={user.id} />
+          </TabsContent>
+
+          <TabsContent value="notifications" className="space-y-6">
+            <NotificationSettings userId={user.id} />
           </TabsContent>
 
           <TabsContent value="settings" className="space-y-6">

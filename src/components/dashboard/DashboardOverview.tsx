@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, AlertTriangle, TrendingUp, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SafetyScore from "./SafetyScore";
 
 interface DashboardOverviewProps {
   userId: string;
@@ -67,6 +68,9 @@ const DashboardOverview = ({ userId }: DashboardOverviewProps) => {
 
   return (
     <div className="space-y-6">
+      {/* Safety Score & Gamification */}
+      <SafetyScore userId={userId} />
+
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card className="bg-card border-border/50 shadow-soft hover:shadow-elevated transition-all">

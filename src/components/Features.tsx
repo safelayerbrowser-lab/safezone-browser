@@ -18,7 +18,7 @@ const features = [
     icon: Heart,
     title: "Romance Scam Alerts",
     description: "Identify manipulative behavior and scam-risk profiles with warning messages and guidance.",
-    color: "text-coral",
+    color: "text-accent",
   },
   {
     icon: Eye,
@@ -30,13 +30,13 @@ const features = [
     icon: Lock,
     title: "Spyware & Phishing Protection",
     description: "Block unsafe links, phishing URLs, malicious scripts, and spyware attempts in real-time.",
-    color: "text-teal",
+    color: "text-primary",
   },
   {
     icon: Users,
     title: "Parental Control Mode",
     description: "Guardians can set safe-browsing filters for girls under 18 with age-appropriate content filtering.",
-    color: "text-secondary",
+    color: "text-accent",
   },
   {
     icon: BarChart3,

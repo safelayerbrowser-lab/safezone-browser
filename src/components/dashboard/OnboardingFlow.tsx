@@ -27,7 +27,7 @@ const onboardingSteps = [
     title: "Welcome to SafeLaylar",
     description: "Let's take a quick tour of how we protect you online",
     icon: Shield,
-    color: "text-teal-500",
+    color: "text-primary",
     features: [
       "Real-time threat detection",
       "Privacy-first protection",
@@ -38,7 +38,7 @@ const onboardingSteps = [
     title: "Content Protection",
     description: "Automatically filter toxic, harmful, or abusive content across all your platforms",
     icon: MessageSquareWarning,
-    color: "text-coral-500",
+    color: "text-accent",
     features: [
       "Toxic comment filtering",
       "Hate speech detection",
@@ -49,7 +49,7 @@ const onboardingSteps = [
     title: "Anti-Grooming Engine",
     description: "Advanced AI detects suspicious behavior patterns and protects you from predatory contacts",
     icon: Users,
-    color: "text-lavender-500",
+    color: "text-primary",
     features: [
       "Behavioral pattern analysis",
       "Automatic contact blocking",
@@ -60,7 +60,7 @@ const onboardingSteps = [
     title: "Romance Scam Alerts",
     description: "Identify manipulative behavior and scam-risk profiles before you get hurt",
     icon: Heart,
-    color: "text-coral-400",
+    color: "text-accent",
     features: [
       "Profile risk analysis",
       "Red flag detection",
@@ -71,7 +71,7 @@ const onboardingSteps = [
     title: "Deepfake Detection",
     description: "Stay safe from manipulated images and videos designed to deceive or harm",
     icon: ScanFace,
-    color: "text-teal-400",
+    color: "text-primary",
     features: [
       "AI-powered media scanning",
       "Site reputation checking",
@@ -82,7 +82,7 @@ const onboardingSteps = [
     title: "Spyware Protection",
     description: "Block malicious links, phishing attempts, and spyware before they reach you",
     icon: Bug,
-    color: "text-lavender-400",
+    color: "text-accent",
     features: [
       "Real-time URL scanning",
       "Phishing detection",
@@ -203,7 +203,7 @@ const OnboardingFlow = ({ userId, onComplete }: OnboardingFlowProps) => {
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center gap-3"
                   >
-                    <CheckCircle className="h-5 w-5 text-teal-500 flex-shrink-0" />
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
                     <span className="text-foreground">{feature}</span>
                   </motion.li>
                 ))}

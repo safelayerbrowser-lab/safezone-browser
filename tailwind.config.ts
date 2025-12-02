@@ -22,6 +22,8 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          light: "hsl(var(--primary-gradient-light))",
+          dark: "hsl(var(--primary-gradient-dark))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -47,20 +49,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        coral: {
-          DEFAULT: "hsl(15 75% 70%)",
-          light: "hsl(15 75% 85%)",
-          dark: "hsl(15 75% 55%)",
-        },
-        teal: {
-          DEFAULT: "hsl(180 45% 55%)",
-          light: "hsl(180 45% 75%)",
-          dark: "hsl(180 55% 40%)",
-        },
-        lavender: {
-          DEFAULT: "hsl(265 50% 70%)",
-          light: "hsl(265 50% 90%)",
-          dark: "hsl(265 60% 45%)",
+        surface: "hsl(0 0% 99%)",
+        "text-main": "hsl(222 38% 12%)",
+        "hid-blue": {
+          DEFAULT: "hsl(216 88% 50%)",
+          light: "hsl(205 88% 51%)",
+          dark: "hsl(206 100% 21%)",
+          accent: "hsl(208 92% 67%)",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -137,7 +132,7 @@ export default {
       backgroundImage: {
         'gradient-hero': 'var(--gradient-hero)',
         'gradient-feature': 'var(--gradient-feature)',
-        'gradient-warm': 'var(--gradient-warm)',
+        'gradient-primary': 'var(--gradient-primary)',
       },
       boxShadow: {
         'soft': 'var(--shadow-soft)',

@@ -36,6 +36,7 @@ const Hero = () => {
             <Button 
               size="lg" 
               variant="outline" 
+              onClick={() => navigate("/install")}
               className="text-lg px-8 py-6 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white shadow-elevated"
             >
               <Download className="mr-2 h-5 w-5" />

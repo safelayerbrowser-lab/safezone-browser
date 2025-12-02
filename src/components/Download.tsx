@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Smartphone, Monitor, Apple } from "lucide-react";
@@ -6,24 +7,26 @@ const platforms = [
   {
     icon: Smartphone,
     name: "Android",
-    description: "Download for Android devices",
-    badge: "APK",
+    description: "Install as app on Android",
+    badge: "PWA",
   },
   {
     icon: Monitor,
     name: "Desktop",
-    description: "Chrome & Edge extensions",
-    badge: "Extension",
+    description: "Install on Windows, Mac, Linux",
+    badge: "PWA",
   },
   {
     icon: Apple,
     name: "iOS",
-    description: "Coming to App Store",
-    badge: "Soon",
+    description: "Install as app on iPhone/iPad",
+    badge: "PWA",
   },
 ];
 
 const Download = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="py-24 bg-gradient-hero">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,7 +35,7 @@ const Download = () => {
             Get SafeLaylar Today
           </h2>
           <p className="text-xl text-white/90">
-            Choose your platform and start browsing safely in minutes
+            Install SafeLaylar on any device - works on phones, tablets, and computers
           </p>
         </div>
         
@@ -60,10 +63,11 @@ const Download = () => {
                 </p>
                 
                 <Button 
+                  onClick={() => navigate("/install")}
                   className="w-full bg-white text-primary hover:bg-white/90"
                   size="lg"
                 >
-                  Download
+                  Install Now
                 </Button>
               </CardContent>
             </Card>
@@ -72,7 +76,7 @@ const Download = () => {
         
         <div className="text-center mt-12 animate-fade-in" style={{ animationDelay: '0.5s' }}>
           <p className="text-white/70 text-sm">
-            Free for personal use • No credit card required • 30-day money-back guarantee for premium
+            Free • Works offline • Installs in seconds • No app store needed
           </p>
         </div>
       </div>

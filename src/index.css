@@ -6,54 +6,59 @@
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
-Trauma-informed design with calming colors and generous whitespace
+HID color palette with trauma-informed UX principles
 */
 
 @layer base {
   :root {
-    /* Calming palette for trauma-informed UX */
-    --background: 180 30% 98%;
-    --foreground: 180 15% 35%;
+    /* HID color palette - Page background */
+    --background: 0 0% 100%;
+    --foreground: 222 38% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 180 15% 35%;
+    /* Surface backgrounds */
+    --card: 0 0% 99%;
+    --card-foreground: 222 38% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 180 15% 35%;
+    --popover: 0 0% 99%;
+    --popover-foreground: 222 38% 12%;
 
-    /* Soft teal for trust and safety */
-    --primary: 180 45% 55%;
+    /* HID Brand Blue */
+    --primary: 216 88% 50%;
     --primary-foreground: 0 0% 100%;
 
-    /* Warm coral for support and empowerment */
-    --secondary: 15 75% 70%;
-    --secondary-foreground: 0 0% 100%;
+    /* HID Gradient colors */
+    --primary-gradient-light: 205 88% 51%;
+    --primary-gradient-dark: 206 100% 21%;
 
-    --muted: 180 25% 95%;
-    --muted-foreground: 210 15% 50%;
+    /* Secondary (keeping for components that need it) */
+    --secondary: 208 92% 67%;
+    --secondary-foreground: 222 38% 12%;
 
-    /* Gentle lavender for calm empowerment */
-    --accent: 265 50% 92%;
-    --accent-foreground: 265 60% 35%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 222 20% 50%;
+
+    /* HID Accent Blue */
+    --accent: 208 92% 67%;
+    --accent-foreground: 222 38% 12%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 25% 88%;
-    --input: 210 25% 88%;
-    --ring: 186 85% 45%;
+    --border: 222 10% 90%;
+    --input: 222 10% 90%;
+    --ring: 216 88% 50%;
 
     --radius: 1rem;
     
-    /* Calming gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(180 45% 55%) 0%, hsl(180 55% 45%) 100%);
-    --gradient-feature: linear-gradient(120deg, hsl(180 35% 97%) 0%, hsl(265 50% 97%) 100%);
-    --gradient-warm: linear-gradient(120deg, hsl(15 75% 92%) 0%, hsl(265 50% 92%) 100%);
+    /* HID gradients for trauma-informed UX */
+    --gradient-hero: linear-gradient(135deg, hsl(205 88% 51%) 0%, hsl(206 100% 21%) 100%);
+    --gradient-feature: linear-gradient(120deg, hsl(0 0% 99%) 0%, hsl(208 92% 97%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(205 88% 51%) 0%, hsl(216 88% 50%) 50%, hsl(206 100% 21%) 100%);
     
-    /* Soft, trauma-informed shadows */
-    --shadow-soft: 0 2px 16px -2px hsl(180 45% 55% / 0.08);
-    --shadow-elevated: 0 8px 32px -4px hsl(180 45% 55% / 0.12);
-    --shadow-subtle: 0 1px 3px hsl(180 30% 30% / 0.05);
+    /* Soft, trauma-informed shadows with HID blue */
+    --shadow-soft: 0 2px 16px -2px hsl(216 88% 50% / 0.08);
+    --shadow-elevated: 0 8px 32px -4px hsl(216 88% 50% / 0.12);
+    --shadow-subtle: 0 1px 3px hsl(222 38% 12% / 0.05);
     
     /* Animation timings - slower for trauma-informed UX */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -77,40 +82,43 @@ Trauma-informed design with calming colors and generous whitespace
   }
 
   .dark {
-    --background: 210 25% 10%;
-    --foreground: 180 25% 95%;
+    --background: 222 38% 8%;
+    --foreground: 0 0% 99%;
 
-    --card: 210 25% 14%;
-    --card-foreground: 180 25% 95%;
+    --card: 222 35% 12%;
+    --card-foreground: 0 0% 99%;
 
-    --popover: 210 25% 14%;
-    --popover-foreground: 180 25% 95%;
+    --popover: 222 35% 12%;
+    --popover-foreground: 0 0% 99%;
 
-    --primary: 180 45% 60%;
+    --primary: 216 88% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 15 75% 65%;
-    --secondary-foreground: 0 0% 100%;
+    --primary-gradient-light: 205 88% 56%;
+    --primary-gradient-dark: 206 100% 26%;
 
-    --muted: 210 20% 20%;
-    --muted-foreground: 180 15% 65%;
+    --secondary: 208 92% 72%;
+    --secondary-foreground: 222 38% 12%;
 
-    --accent: 265 45% 25%;
-    --accent-foreground: 265 50% 90%;
+    --muted: 222 25% 16%;
+    --muted-foreground: 222 15% 65%;
+
+    --accent: 208 92% 72%;
+    --accent-foreground: 222 38% 12%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 25% 20%;
-    --input: 215 25% 20%;
-    --ring: 186 85% 50%;
+    --border: 222 20% 20%;
+    --input: 222 20% 20%;
+    --ring: 216 88% 55%;
     
-    --gradient-hero: linear-gradient(135deg, hsl(180 45% 50%) 0%, hsl(180 55% 35%) 100%);
-    --gradient-feature: linear-gradient(120deg, hsl(210 25% 16%) 0%, hsl(265 45% 20%) 100%);
-    --gradient-warm: linear-gradient(120deg, hsl(15 60% 20%) 0%, hsl(265 45% 22%) 100%);
-    --shadow-soft: 0 2px 16px -2px hsl(180 45% 50% / 0.15);
-    --shadow-elevated: 0 8px 32px -4px hsl(180 45% 50% / 0.2);
-    --shadow-subtle: 0 1px 3px hsl(180 30% 10% / 0.1);
+    --gradient-hero: linear-gradient(135deg, hsl(205 88% 56%) 0%, hsl(206 100% 26%) 100%);
+    --gradient-feature: linear-gradient(120deg, hsl(222 35% 12%) 0%, hsl(208 92% 20%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(205 88% 56%) 0%, hsl(216 88% 55%) 50%, hsl(206 100% 26%) 100%);
+    --shadow-soft: 0 2px 16px -2px hsl(216 88% 50% / 0.15);
+    --shadow-elevated: 0 8px 32px -4px hsl(216 88% 50% / 0.2);
+    --shadow-subtle: 0 1px 3px hsl(222 38% 12% / 0.1);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafeLaylar Browser Shield</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      width: 320px;
+      background: linear-gradient(180deg, #FDFDFD 0%, #F0F4F8 100%);
+      color: #131A2A;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #1590F0 0%, #0F68EF 50%, #002F6C 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    
+    .logo svg {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .logo span {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .status {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+    
+    .stats {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    
+    .stat-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0F68EF;
+    }
+    
+    .stat-label {
+      font-size: 11px;
+      color: #6B7280;
+      margin-top: 4px;
+    }
+    
+    .controls {
+      padding: 0 16px 16px;
+    }
+    
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    
+    .toggle-label {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      cursor: pointer;
+    }
+    
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .toggle-slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #E5E7EB;
+      border-radius: 24px;
+      transition: 0.3s;
+    }
+    
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.3s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    input:checked + .toggle-slider {
+      background: linear-gradient(135deg, #1590F0, #0F68EF);
+    }
+    
+    input:checked + .toggle-slider:before {
+      transform: translateX(20px);
+    }
+    
+    .actions {
+      padding: 0 16px 16px;
+    }
+    
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      text-align: center;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #1590F0, #0F68EF);
+      color: white;
+      margin-bottom: 8px;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(15, 104, 239, 0.4);
+    }
+    
+    .btn-secondary {
+      background: white;
+      color: #0F68EF;
+      border: 1px solid #E5E7EB;
+    }
+    
+    .btn-secondary:hover {
+      background: #F9FAFB;
+    }
+    
+    .footer {
+      padding: 12px 16px;
+      text-align: center;
+      font-size: 11px;
+      color: #9CA3AF;
+      border-top: 1px solid #E5E7EB;
+    }
+    
+    .footer a {
+      color: #0F68EF;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      <span>SafeLaylar</span>
+    </div>
+    <div class="status" id="status">Protection Active</div>
+  </div>
+  
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-value" id="threatsBlocked">0</div>
+      <div class="stat-label">Threats Blocked</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="phishingBlocked">0</div>
+      <div class="stat-label">Phishing Blocked</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="scamsBlocked">0</div>
+      <div class="stat-label">Scams Blocked</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="toxicBlocked">0</div>
+      <div class="stat-label">Toxic Content</div>
+    </div>
+  </div>
+  
+  <div class="controls">
+    <div class="toggle-row">
+      <span class="toggle-label">Enable Protection</span>
+      <label class="toggle">
+        <input type="checkbox" id="enableProtection" checked>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div class="toggle-row">
+      <span class="toggle-label">Anti-Grooming</span>
+      <label class="toggle">
+        <input type="checkbox" id="antiGrooming" checked>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div class="toggle-row">
+      <span class="toggle-label">Content Filter</span>
+      <label class="toggle">
+        <input type="checkbox" id="contentFilter" checked>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+  </div>
+  
+  <div class="actions">
+    <a href="https://safelaylar.app/dashboard" target="_blank" class="btn btn-primary">
+      Open Dashboard
+    </a>
+    <a href="https://safelaylar.app/support" target="_blank" class="btn btn-secondary">
+      Get Help
+    </a>
+  </div>
+  
+  <div class="footer">
+    Made with ❤️ by <a href="https://safelaylar.app" target="_blank">SafeLaylar</a>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

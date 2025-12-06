@@ -1,0 +1,100 @@
+/* SafeLaylar Browser Shield - Content Styles */
+
+.safelaylar-blur {
+  filter: blur(10px) !important;
+  transition: filter 0.3s ease !important;
+  cursor: pointer !important;
+  position: relative !important;
+}
+
+.safelaylar-blur::after {
+  content: '🛡️ Content filtered by SafeLaylar' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  background: rgba(15, 104, 239, 0.95) !important;
+  color: white !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  font-size: 12px !important;
+  font-family: Inter, sans-serif !important;
+  white-space: nowrap !important;
+  z-index: 10000 !important;
+  pointer-events: none !important;
+}
+
+.safelaylar-blocked {
+  display: none !important;
+}
+
+.safelaylar-badge {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  background: linear-gradient(135deg, #1590F0, #0F68EF) !important;
+  color: white !important;
+  padding: 10px 16px !important;
+  border-radius: 50px !important;
+  font-size: 12px !important;
+  font-family: Inter, sans-serif !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  box-shadow: 0 4px 20px rgba(15, 104, 239, 0.4) !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.safelaylar-badge:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 25px rgba(15, 104, 239, 0.5) !important;
+}
+
+.safelaylar-warning-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(0, 47, 108, 0.95) !important;
+  z-index: 9999999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: white !important;
+  font-family: Inter, sans-serif !important;
+  text-align: center !important;
+  padding: 40px !important;
+}
+
+.safelaylar-warning-overlay h1 {
+  font-size: 24px !important;
+  margin-bottom: 16px !important;
+}
+
+.safelaylar-warning-overlay p {
+  font-size: 16px !important;
+  opacity: 0.9 !important;
+  max-width: 400px !important;
+  line-height: 1.6 !important;
+}
+
+.safelaylar-warning-overlay button {
+  margin-top: 24px !important;
+  padding: 12px 32px !important;
+  background: white !important;
+  color: #0F68EF !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+}
+
+.safelaylar-warning-overlay button:hover {
+  transform: scale(1.05) !important;
+}

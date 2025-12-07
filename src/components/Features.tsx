@@ -6,43 +6,43 @@ const features = [
     icon: Shield,
     title: "Content Protection",
     description: "Automatically filter explicit, degrading, violent, and harmful content. Connect your social media to hide toxic comments and threats.",
-    color: "text-primary",
+    gradient: "from-primary to-secondary",
   },
   {
     icon: AlertTriangle,
     title: "Anti-Grooming Engine",
     description: "Detect suspicious behavior patterns and block known grooming websites and communication attempts.",
-    color: "text-secondary",
+    gradient: "from-secondary to-accent",
   },
   {
     icon: Heart,
     title: "Romance Scam Alerts",
     description: "Identify manipulative behavior and scam-risk profiles with warning messages and guidance.",
-    color: "text-accent",
+    gradient: "from-accent to-primary",
   },
   {
     icon: Eye,
     title: "Deepfake Detection",
     description: "Get alerts when accessing sites known for manipulated content. Scan uploaded images for deepfake risks.",
-    color: "text-primary",
+    gradient: "from-primary to-secondary",
   },
   {
     icon: Lock,
     title: "Spyware & Phishing Protection",
     description: "Block unsafe links, phishing URLs, malicious scripts, and spyware attempts in real-time.",
-    color: "text-primary",
+    gradient: "from-secondary to-accent",
   },
   {
     icon: Users,
     title: "Parental Control Mode",
-    description: "Guardians can set safe-browsing filters for girls under 18 with age-appropriate content filtering.",
-    color: "text-accent",
+    description: "Guardians can monitor safety scores, view threat history, and set safe-browsing filters for children.",
+    gradient: "from-accent to-primary",
   },
   {
     icon: BarChart3,
     title: "Safety Reports",
-    description: "Weekly dashboards showing blocked threats, browsing safety scores, and recommended safety actions.",
-    color: "text-primary",
+    description: "Weekly PDF reports showing blocked threats, browsing safety scores, and recommended safety actions.",
+    gradient: "from-primary to-secondary",
   },
 ];
 
@@ -63,12 +63,12 @@ const Features = () => {
           {features.map((feature, index) => (
             <Card 
               key={index} 
-              className="group hover:shadow-elevated transition-all duration-300 border-border/50 hover:border-primary/30 animate-scale-in bg-card"
+              className="group hover:shadow-elevated transition-all duration-300 border-border/50 hover:border-secondary/50 animate-scale-in bg-card"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <CardContent className="p-8">
-                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-accent mb-6 group-hover:scale-110 transition-transform ${feature.color}`}>
-                  <feature.icon className="w-7 h-7" />
+                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${feature.gradient} mb-6 group-hover:scale-110 transition-transform shadow-soft`}>
+                  <feature.icon className="w-7 h-7 text-primary-foreground" />
                 </div>
                 <h3 className="text-xl font-semibold text-card-foreground mb-3">
                   {feature.title}

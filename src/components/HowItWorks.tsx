@@ -4,7 +4,7 @@ const steps = [
   {
     icon: Download,
     title: "Install in Seconds",
-    description: "Download SafeLaylar for your device. Works on Android, iOS, and desktop browsers.",
+    description: "Download SafeLaylar for Android or install the Safari/Chrome/Firefox extension.",
   },
   {
     icon: Shield,
@@ -14,7 +14,7 @@ const steps = [
   {
     icon: CheckCircle,
     title: "Browse with Confidence",
-    description: "Get real-time alerts and weekly safety reports. Stay informed, stay safe.",
+    description: "Get real-time alerts and weekly PDF safety reports. Stay informed, stay safe.",
   },
 ];
 
@@ -39,10 +39,10 @@ const HowItWorks = () => {
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               <div className="relative mb-6">
-                <div className="flex items-center justify-center w-20 h-20 rounded-2xl bg-primary text-primary-foreground shadow-elevated">
+                <div className="flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-secondary text-primary-foreground shadow-elevated">
                   <step.icon className="w-10 h-10" />
                 </div>
-                <div className="absolute -top-2 -right-2 flex items-center justify-center w-8 h-8 rounded-full bg-secondary text-secondary-foreground text-sm font-bold shadow-soft">
+                <div className="absolute -top-2 -right-2 flex items-center justify-center w-8 h-8 rounded-full bg-accent text-accent-foreground text-sm font-bold shadow-soft">
                   {index + 1}
                 </div>
               </div>
@@ -55,7 +55,7 @@ const HowItWorks = () => {
               </p>
               
               {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-10 left-[60%] w-[80%] h-0.5 bg-border/50"></div>
+                <div className="hidden md:block absolute top-10 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-secondary to-transparent"></div>
               )}
             </div>
           ))}

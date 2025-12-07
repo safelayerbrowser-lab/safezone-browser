@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      chat_messages: {
+        Row: {
+          content: string
+          conversation_id: string
+          created_at: string
+          id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          role: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       filter_settings: {
         Row: {
           anti_grooming: boolean | null
@@ -80,6 +107,42 @@ export type Database = {
           network_activity_alerts?: boolean | null
           updated_at?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      parental_connections: {
+        Row: {
+          can_view_reports: boolean | null
+          can_view_score: boolean | null
+          can_view_threats: boolean | null
+          child_user_id: string
+          created_at: string
+          id: string
+          parent_user_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          can_view_reports?: boolean | null
+          can_view_score?: boolean | null
+          can_view_threats?: boolean | null
+          child_user_id: string
+          created_at?: string
+          id?: string
+          parent_user_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          can_view_reports?: boolean | null
+          can_view_score?: boolean | null
+          can_view_threats?: boolean | null
+          child_user_id?: string
+          created_at?: string
+          id?: string
+          parent_user_id?: string
+          status?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -229,6 +292,36 @@ export type Database = {
           severity?: string
           threat_source?: string
           threat_type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      weekly_reports: {
+        Row: {
+          created_at: string
+          id: string
+          report_data: Json | null
+          report_date: string
+          safety_score: number | null
+          threats_blocked: number | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          report_data?: Json | null
+          report_date: string
+          safety_score?: number | null
+          threats_blocked?: number | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          report_data?: Json | null
+          report_date?: string
+          safety_score?: number | null
+          threats_blocked?: number | null
           user_id?: string
         }
         Relationships: []

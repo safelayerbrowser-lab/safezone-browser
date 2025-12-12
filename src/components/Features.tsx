@@ -48,9 +48,9 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-24 bg-gradient-feature">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center mb-16 animate-slide-up">
+        <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
           <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
             Complete Protection Suite
           </h2>
@@ -59,21 +59,20 @@ const Features = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <Card 
               key={index} 
-              className="group hover:shadow-elevated transition-all duration-300 border-border/50 hover:border-secondary/50 animate-scale-in bg-card"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="group hover:shadow-elevated transition-all duration-300 border-border/50 hover:border-primary/30 bg-card"
             >
               <CardContent className="p-8">
-                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${feature.gradient} mb-6 group-hover:scale-110 transition-transform shadow-soft`}>
-                  <feature.icon className="w-7 h-7 text-primary-foreground" />
+                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} mb-5 group-hover:scale-110 transition-transform shadow-sm`}>
+                  <feature.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-card-foreground mb-3">
+                <h3 className="text-lg font-semibold text-card-foreground mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </CardContent>

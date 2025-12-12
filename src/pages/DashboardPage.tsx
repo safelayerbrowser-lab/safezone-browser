@@ -11,7 +11,11 @@ import SafetyNetwork from "@/components/dashboard/SafetyNetwork";
 import SharedTips from "@/components/dashboard/SharedTips";
 import NotificationSettings from "@/components/dashboard/NotificationSettings";
 import OnboardingFlow from "@/components/dashboard/OnboardingFlow";
+import ParentalDashboard from "@/components/dashboard/ParentalDashboard";
+import ChildAcceptanceFlow from "@/components/dashboard/ChildAcceptanceFlow";
+import WeeklyReports from "@/components/dashboard/WeeklyReports";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Shield, AlertTriangle, Users, Bell, Settings, FileText, UserCheck, BarChart } from "lucide-react";
 
 const DashboardPage = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -58,7 +62,12 @@ const DashboardPage = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center animate-pulse-soft">
+            <Shield className="w-8 h-8 text-primary-foreground" />
+          </div>
+          <p className="text-muted-foreground">Loading your dashboard...</p>
+        </div>
       </div>
     );
   }
@@ -74,55 +83,86 @@ const DashboardPage = () => {
         />
       )}
       <DashboardLayout user={user}>
-      <div className="space-y-8">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">Safety Dashboard</h1>
-          <p className="text-muted-foreground">
-            Monitor your protection status and manage your safety settings
-          </p>
+        <div className="space-y-8 animate-fade-in">
+          <div>
+            <h1 className="text-3xl font-bold text-foreground mb-2">Safety Dashboard</h1>
+            <p className="text-muted-foreground">
+              Monitor your protection status and manage your safety settings
+            </p>
+          </div>
+
+          <Tabs defaultValue="overview" className="space-y-6">
+            <TabsList className="flex flex-wrap gap-1 h-auto p-1 bg-muted/50 border border-border/50">
+              <TabsTrigger value="overview" className="gap-2 data-[state=active]:bg-card data-[state=active]:shadow-sm">
+                <BarChart className="w-4 h-4" />
+                <span className="hidden sm:inline">Overview</span>
+              </TabsTrigger>
+              <TabsTrigger value="threats" className="gap-2 data-[state=active]:bg-card data-[state=active]:shadow-sm">
+                <AlertTriangle className="w-4 h-4" />
+                <span className="hidden sm:inline">Threats</span>
+              </TabsTrigger>
+              <TabsTrigger value="accounts" className="gap-2 data-[state=active]:bg-card data-[state=active]:shadow-sm">
+                <Shield className="w-4 h-4" />
+                <span className="hidden sm:inline">Accounts</span>
+              </TabsTrigger>
+              <TabsTrigger value="family" className="gap-2 data-[state=active]:bg-card data-[state=active]:shadow-sm">
+                <Users className="w-4 h-4" />
+                <span className="hidden sm:inline">Family</span>
+              </TabsTrigger>
+              <TabsTrigger value="parental" className="gap-2 data-[state=active]:bg-card data-[state=active]:shadow-sm">
+                <UserCheck className="w-4 h-4" />
+                <span className="hidden sm:inline">Parental</span>
+              </TabsTrigger>
+              <TabsTrigger value="reports" className="gap-2 data-[state=active]:bg-card data-[state=active]:shadow-sm">
+                <FileText className="w-4 h-4" />
+                <span className="hidden sm:inline">Reports</span>
+              </TabsTrigger>
+              <TabsTrigger value="notifications" className="gap-2 data-[state=active]:bg-card data-[state=active]:shadow-sm">
+                <Bell className="w-4 h-4" />
+                <span className="hidden sm:inline">Alerts</span>
+              </TabsTrigger>
+              <TabsTrigger value="settings" className="gap-2 data-[state=active]:bg-card data-[state=active]:shadow-sm">
+                <Settings className="w-4 h-4" />
+                <span className="hidden sm:inline">Settings</span>
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="overview" className="space-y-6 animate-fade-in">
+              <DashboardOverview userId={user.id} />
+            </TabsContent>
+
+            <TabsContent value="threats" className="space-y-6 animate-fade-in">
+              <ThreatHistory userId={user.id} />
+            </TabsContent>
+
+            <TabsContent value="accounts" className="space-y-6 animate-fade-in">
+              <ProtectedAccounts userId={user.id} />
+            </TabsContent>
+
+            <TabsContent value="family" className="space-y-6 animate-fade-in">
+              <ChildAcceptanceFlow userId={user.id} />
+              <SafetyNetwork userId={user.id} />
+              <SharedTips userId={user.id} />
+            </TabsContent>
+
+            <TabsContent value="parental" className="space-y-6 animate-fade-in">
+              <ParentalDashboard userId={user.id} />
+            </TabsContent>
+
+            <TabsContent value="reports" className="space-y-6 animate-fade-in">
+              <WeeklyReports userId={user.id} />
+            </TabsContent>
+
+            <TabsContent value="notifications" className="space-y-6 animate-fade-in">
+              <NotificationSettings userId={user.id} />
+            </TabsContent>
+
+            <TabsContent value="settings" className="space-y-6 animate-fade-in">
+              <FilterSettings userId={user.id} />
+            </TabsContent>
+          </Tabs>
         </div>
-
-        <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7 lg:w-auto lg:grid-cols-none">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="threats">Threats</TabsTrigger>
-            <TabsTrigger value="accounts">Accounts</TabsTrigger>
-            <TabsTrigger value="network">Network</TabsTrigger>
-            <TabsTrigger value="tips">Tips</TabsTrigger>
-            <TabsTrigger value="notifications">Alerts</TabsTrigger>
-            <TabsTrigger value="settings">Settings</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="overview" className="space-y-6">
-            <DashboardOverview userId={user.id} />
-          </TabsContent>
-
-          <TabsContent value="threats" className="space-y-6">
-            <ThreatHistory userId={user.id} />
-          </TabsContent>
-
-          <TabsContent value="accounts" className="space-y-6">
-            <ProtectedAccounts userId={user.id} />
-          </TabsContent>
-
-          <TabsContent value="network" className="space-y-6">
-            <SafetyNetwork userId={user.id} />
-          </TabsContent>
-
-          <TabsContent value="tips" className="space-y-6">
-            <SharedTips userId={user.id} />
-          </TabsContent>
-
-          <TabsContent value="notifications" className="space-y-6">
-            <NotificationSettings userId={user.id} />
-          </TabsContent>
-
-          <TabsContent value="settings" className="space-y-6">
-            <FilterSettings userId={user.id} />
-          </TabsContent>
-        </Tabs>
-      </div>
-    </DashboardLayout>
+      </DashboardLayout>
     </>
   );
 };

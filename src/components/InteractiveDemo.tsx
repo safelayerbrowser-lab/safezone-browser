@@ -1,220 +1,174 @@
 import { useState, useEffect } from "react";
-import { Shield, X, AlertTriangle, Ban } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { Shield, Ban, Check, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const threats = [
-  {
-    id: 1,
-    type: "Toxic Comment",
-    text: "You're so...",
-    platform: "Instagram",
-    severity: "high",
-    delay: 1000,
-  },
-  {
-    id: 2,
-    type: "Scam Attempt",
-    text: "Click here to claim...",
-    platform: "WhatsApp",
-    severity: "critical",
-    delay: 2500,
-  },
-  {
-    id: 3,
-    type: "Phishing Link",
-    text: "Verify your account at...",
-    platform: "Email",
-    severity: "critical",
-    delay: 4000,
-  },
-  {
-    id: 4,
-    type: "Harmful Content",
-    text: "Inappropriate image detected",
-    platform: "Twitter",
-    severity: "medium",
-    delay: 5500,
-  },
+  { id: 1, type: "Toxic Comment", source: "Instagram", severity: "high" },
+  { id: 2, type: "Phishing Link", source: "Email", severity: "critical" },
+  { id: 3, type: "Scam Attempt", source: "WhatsApp", severity: "high" },
+  { id: 4, type: "Harmful Content", source: "Twitter", severity: "medium" },
 ];
 
 const InteractiveDemo = () => {
-  const [blockedThreats, setBlockedThreats] = useState<number[]>([]);
-  const [activeThreats, setActiveThreats] = useState<number[]>([]);
+  const [blockedCount, setBlockedCount] = useState(0);
+  const [activeThreat, setActiveThreat] = useState<number | null>(null);
+  const [showBlocked, setShowBlocked] = useState<number | null>(null);
 
   useEffect(() => {
-    threats.forEach((threat) => {
-      // Show threat first
+    let currentIndex = 0;
+    
+    const showThreat = () => {
+      if (currentIndex >= threats.length) {
+        currentIndex = 0;
+        setBlockedCount(0);
+      }
+      
+      const threat = threats[currentIndex];
+      setActiveThreat(threat.id);
+      
       setTimeout(() => {
-        setActiveThreats((prev) => [...prev, threat.id]);
+        setShowBlocked(threat.id);
+        setBlockedCount(prev => prev + 1);
         
-        // Block it after a short delay
         setTimeout(() => {
-          setBlockedThreats((prev) => [...prev, threat.id]);
-          setTimeout(() => {
-            setActiveThreats((prev) => prev.filter((id) => id !== threat.id));
-          }, 1000);
-        }, 800);
-      }, threat.delay);
-    });
+          setActiveThreat(null);
+          setShowBlocked(null);
+          currentIndex++;
+        }, 1500);
+      }, 1000);
+    };
 
-    // Reset animation
-    const resetInterval = setInterval(() => {
-      setBlockedThreats([]);
-      setActiveThreats([]);
-    }, 12000);
-
-    return () => clearInterval(resetInterval);
+    showThreat();
+    const interval = setInterval(showThreat, 4000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="py-32 bg-gradient-feature relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-lavender/10 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 text-primary mb-6">
-            <Shield className="w-8 h-8" />
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
-            See SafeLaylar in Action
-          </h2>
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            Watch how we protect you in real-time, blocking threats before they reach you
-          </p>
-        </div>
-
+    <section className="py-32 bg-muted/30 relative overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
-          {/* Browser Mockup */}
-          <Card className="bg-card shadow-elevated border-border/50 overflow-hidden">
-            {/* Browser Chrome */}
-            <div className="bg-muted border-b border-border px-4 py-3 flex items-center gap-2">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
+              See it in action
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Watch how SafeLaylar protects you in real-time
+            </p>
+          </motion.div>
+
+          {/* Demo container */}
+          <motion.div 
+            className="relative bg-card rounded-3xl border border-border/50 shadow-2xl overflow-hidden"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
+            {/* Browser header */}
+            <div className="flex items-center gap-3 px-6 py-4 bg-muted/50 border-b border-border/50">
               <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-destructive/60"></div>
-                <div className="w-3 h-3 rounded-full bg-secondary/60"></div>
-                <div className="w-3 h-3 rounded-full bg-primary/60"></div>
+                <div className="w-3 h-3 rounded-full bg-destructive/50" />
+                <div className="w-3 h-3 rounded-full bg-warning/50" />
+                <div className="w-3 h-3 rounded-full bg-success/50" />
               </div>
-              <div className="flex-1 mx-4 bg-background rounded-lg px-4 py-2 text-sm text-muted-foreground flex items-center gap-2">
+              <div className="flex-1 flex items-center gap-2 px-4 py-2 bg-background rounded-lg text-sm text-muted-foreground">
                 <Shield className="w-4 h-4 text-primary" />
-                <span className="truncate">SafeLaylar Protected Browser</span>
+                <span>Protected by SafeLaylar</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <div className="w-2 h-2 rounded-full bg-success animate-pulse" />
+                <span className="text-muted-foreground">Active</span>
               </div>
             </div>
 
-            {/* Browser Content Area */}
-            <div className="bg-background p-8 min-h-[500px] relative">
-              {/* Social Feed Simulation */}
-              <div className="space-y-4 max-w-2xl mx-auto">
-                <div className="text-sm font-medium text-muted-foreground mb-6">
-                  Social Media Feed
-                </div>
-
-                {/* Safe Content */}
-                <div className="bg-card border border-border rounded-xl p-4 space-y-3 shadow-subtle">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/10"></div>
-                    <div>
-                      <div className="font-medium text-sm">Friend</div>
-                      <div className="text-xs text-muted-foreground">2 hours ago</div>
+            {/* Content area */}
+            <div className="p-8 min-h-[400px] flex items-center justify-center relative">
+              {/* Background social feed simulation */}
+              <div className="absolute inset-8 flex flex-col gap-4 opacity-30">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="flex items-center gap-4 p-4 bg-muted/50 rounded-xl">
+                    <div className="w-10 h-10 rounded-full bg-muted" />
+                    <div className="flex-1">
+                      <div className="h-3 w-24 bg-muted rounded" />
+                      <div className="h-2 w-40 bg-muted rounded mt-2" />
                     </div>
                   </div>
-                  <p className="text-sm text-foreground">
-                    Had a great day at the park! 🌸
-                  </p>
-                </div>
+                ))}
+              </div>
 
-                {/* Threat Detection Zone */}
-                <div className="relative space-y-4">
-                  {threats.map((threat) => (
-                    <div
-                      key={threat.id}
-                      className={`transition-all duration-500 ${
-                        activeThreats.includes(threat.id)
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 -translate-y-4 absolute"
-                      }`}
-                    >
-                      <div
-                        className={`relative bg-card border rounded-xl p-4 space-y-3 shadow-subtle ${
-                          blockedThreats.includes(threat.id)
-                            ? "border-destructive/50 bg-destructive/5"
-                            : "border-border"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-muted"></div>
-                          <div className="flex-1">
-                            <div className="font-medium text-sm">Suspicious Account</div>
-                            <div className="text-xs text-muted-foreground">{threat.platform}</div>
-                          </div>
+              {/* Active threat detection */}
+              <AnimatePresence mode="wait">
+                {activeThreat && (
+                  <motion.div
+                    key={activeThreat}
+                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, y: -20 }}
+                    className="relative z-10 w-full max-w-md"
+                  >
+                    <div className={`p-6 rounded-2xl border-2 transition-colors ${
+                      showBlocked 
+                        ? 'bg-destructive/10 border-destructive/50' 
+                        : 'bg-card border-warning/50'
+                    }`}>
+                      <div className="flex items-start gap-4">
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                          showBlocked ? 'bg-destructive' : 'bg-warning'
+                        }`}>
+                          {showBlocked ? (
+                            <Ban className="w-6 h-6 text-white" />
+                          ) : (
+                            <Shield className="w-6 h-6 text-white animate-pulse" />
+                          )}
                         </div>
-                        <p className="text-sm text-foreground blur-sm">{threat.text}</p>
-
-                        {/* Blocking Animation */}
-                        {blockedThreats.includes(threat.id) && (
-                          <div className="absolute inset-0 bg-destructive/95 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center gap-3 animate-scale-in">
-                            <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
-                              <Ban className="w-8 h-8 text-white" />
-                            </div>
-                            <div className="text-center text-white">
-                              <div className="font-semibold mb-1">{threat.type} Blocked</div>
-                              <div className="text-sm opacity-90">
-                                SafeLaylar protected you
-                              </div>
-                            </div>
+                        <div className="flex-1">
+                          <div className="text-lg font-semibold text-foreground">
+                            {showBlocked ? 'Threat Blocked!' : 'Threat Detected'}
                           </div>
-                        )}
+                          <div className="text-muted-foreground text-sm mt-1">
+                            {threats.find(t => t.id === activeThreat)?.type} • {threats.find(t => t.id === activeThreat)?.source}
+                          </div>
+                          {showBlocked && (
+                            <motion.div 
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              className="mt-3 flex items-center gap-2 text-success text-sm"
+                            >
+                              <Check className="w-4 h-4" />
+                              <span>You're protected</span>
+                            </motion.div>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-                {/* More Safe Content */}
-                <div className="bg-card border border-border rounded-xl p-4 space-y-3 shadow-subtle">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-secondary/10"></div>
-                    <div>
-                      <div className="font-medium text-sm">Family Member</div>
-                      <div className="text-xs text-muted-foreground">5 hours ago</div>
-                    </div>
-                  </div>
-                  <p className="text-sm text-foreground">
-                    Looking forward to dinner tonight! 🍽️
-                  </p>
+              {/* Stats */}
+              <div className="absolute bottom-8 left-8 right-8 flex items-center justify-center gap-8">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-foreground">{blockedCount}</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Blocked</div>
                 </div>
-              </div>
-
-              {/* Live Protection Indicator */}
-              <div className="absolute top-4 right-4">
-                <div className="bg-primary/10 border border-primary/30 rounded-full px-4 py-2 flex items-center gap-2 animate-pulse">
-                  <div className="w-2 h-2 rounded-full bg-primary"></div>
-                  <span className="text-xs font-medium text-primary">
-                    {blockedThreats.length} Threats Blocked
-                  </span>
+                <div className="w-px h-8 bg-border" />
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-success">100%</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Protected</div>
+                </div>
+                <div className="w-px h-8 bg-border" />
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-primary">&lt;1s</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Response</div>
                 </div>
               </div>
             </div>
-          </Card>
-
-          {/* Stats Below Demo */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50 p-6 text-center shadow-soft">
-              <div className="text-3xl font-bold text-primary mb-2">
-                {blockedThreats.length}/4
-              </div>
-              <div className="text-sm text-muted-foreground">Threats Blocked</div>
-            </Card>
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50 p-6 text-center shadow-soft">
-              <div className="text-3xl font-bold text-secondary mb-2">0.8s</div>
-              <div className="text-sm text-muted-foreground">Average Response</div>
-            </Card>
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50 p-6 text-center shadow-soft">
-              <div className="text-3xl font-bold text-lavender mb-2">100%</div>
-              <div className="text-sm text-muted-foreground">Protection Rate</div>
-            </Card>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
